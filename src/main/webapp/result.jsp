@@ -10,6 +10,8 @@
       <h2>Result:</h2>
       <p>Male: <%= request.getAttribute("male") %></p>
       <p>Female: <%= request.getAttribute("female") %></p>
+        <p>Cat: <%= request.getAttribute("cat") %></p>
+        <p>Dog: <%= request.getAttribute("dog") %></p>
         <br>Click this link to <a href="vote?a=reset"> -Reset- </a>
       <h3>Vote again <a href="index.jsp"> -Click- </a></h3>
     </form>

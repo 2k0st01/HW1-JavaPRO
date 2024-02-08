@@ -18,6 +18,16 @@
             </label>
         </fieldset>
         <br>
+        <fieldset>
+            <legend>Select your favorite animal</legend>
+            <label for="id-cat">
+                <input type="radio" id="id-cat" name="animal" value="cat" required> Cat
+            </label>
+            <br>
+            <label for="id-dog">
+                <input type="radio" id="id-dog" name="animal" value="gog" required> Dog
+            </label>
+        </fieldset>
         <button type="submit" name="button" value="send">Submit</button>
     </form>
 </fieldset>
