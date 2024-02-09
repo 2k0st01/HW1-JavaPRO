@@ -17,7 +17,7 @@
         <p>Cat: <%= dataSave.getCat().get() %></p>
         <p>Dog: <%= dataSave.getDog().get() %></p>
         <br>Click this link to <a href="/result?a=reset"> -Reset- </a>
-        <h3>Join in home <a href="WEB-INF/index.jsp"> -Page- </a></h3>
+        <h3>Join in home <a href="index.jsp"> -Page- </a></h3>
     </form>
 </fieldset>
 </body>

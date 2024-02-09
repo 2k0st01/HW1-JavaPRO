@@ -24,10 +24,7 @@ public class CounterServlet extends HttpServlet {
         String answer2 = request.getParameter("animal");
         HttpSession session = request.getSession(true);
         DataSave dataSave = (DataSave) session.getAttribute("dataSave");
-        if (dataSave == null) {
-            dataSave = new DataSave();
-            session.setAttribute("dataSave", dataSave);
-        }
+
         if ("male".equals(answer)) {
             dataSave.incrementMale();
         } else {
@@ -38,7 +35,7 @@ public class CounterServlet extends HttpServlet {
         } else {
             dataSave.incrementDog();
         }
-        session.setAttribute("dataSave", dataSave);
+
         doGet(request,response);
     }
 
