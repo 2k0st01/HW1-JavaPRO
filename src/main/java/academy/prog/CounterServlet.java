@@ -1,55 +1,64 @@
 package academy.prog;
 
+import academy.prog.users.DataSave;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class CounterServlet extends HttpServlet {
-    private final AtomicInteger temp1 = new AtomicInteger(0);
-    private final AtomicInteger temp2 = new AtomicInteger(0);
-    private final AtomicInteger temp3 = new AtomicInteger(0);
-    private final AtomicInteger temp4 = new AtomicInteger(0);
-
     public CounterServlet() {
+
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String answer = request.getParameter("gender");
         String answer2 = request.getParameter("animal");
+        HttpSession session = request.getSession(true);
+        DataSave dataSave = (DataSave) session.getAttribute("dataSave");
+        if (dataSave == null) {
+            dataSave = new DataSave();
+            session.setAttribute("dataSave", dataSave);
+        }
         if ("male".equals(answer)) {
-            temp1.incrementAndGet();
+            dataSave.incrementMale();
         } else {
-            temp2.incrementAndGet();
+            dataSave.incrementFemale();
         }
         if ("cat".equals(answer2)) {
-            temp3.incrementAndGet();
+            dataSave.incrementCat();
         } else {
-            temp4.incrementAndGet();
+            dataSave.incrementDog();
         }
-            doGet(request, response);
+        session.setAttribute("dataSave", dataSave);
+        doGet(request,response);
     }
 
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String a = request.getParameter("a");
+        HttpSession session = request.getSession(true);
+        DataSave dataSave = (DataSave) session.getAttribute("dataSave");
         if ("reset".equals(a)) {
-            temp1.set(0);
-            temp2.set(0);
-            temp3.set(0);
-            temp4.set(0);
-            response.sendRedirect("vote");
+            dataSave.setMale(new AtomicInteger(0));
+            dataSave.setFemale(new AtomicInteger(0));
+            dataSave.setCat(new AtomicInteger(0));
+            dataSave.setDog(new AtomicInteger(0));
+            response.sendRedirect("result");
         } else {
-            request.setAttribute("male", temp1.get());
-            request.setAttribute("female", temp2.get());
-            request.setAttribute("cat", temp3.get());
-            request.setAttribute("dog", temp4.get());
+            request.setAttribute("male", dataSave.getMale());
+            request.setAttribute("female", dataSave.getFemale());
+            request.setAttribute("cat", dataSave.getCat());
+            request.setAttribute("dog", dataSave.getDog());
 
             RequestDispatcher dispatcher = request.getRequestDispatcher("result.jsp");
             try {
