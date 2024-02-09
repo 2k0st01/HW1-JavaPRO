@@ -99,9 +99,9 @@ button[type="submit"]:hover {
 }
 
 fieldset {
-    width: 40%;
+    width: 50%;
     margin: 50px auto;
-    padding: 15px;
+    padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
     background-color: #fff;
